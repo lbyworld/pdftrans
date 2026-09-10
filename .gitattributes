@@ -1,0 +1,12 @@
+# Normalize line endings: store LF in the repository, use the platform's
+# native EOL on checkout. This avoids CRLF/LF churn when the repo is cloned
+# on Windows vs. Linux/macOS.
+* text=auto
+
+# Explicitly treat common text files as text (LF in the repo).
+*.py     text
+*.md     text
+*.json   text
+*.txt    text
+*.gitignore text
+*.gitattributes text

@@ -1,0 +1,33 @@
+# PDF Translation Pipeline — Python dependencies
+# Python 3.12
+#
+# Install order matters for GPU support. Install torch (CUDA 12.8) FIRST,
+# then the rest:
+#
+#   # 1) torch + cu128 (aliyun mirror; ~2.75 GB wheel)
+#   pip install torch==2.11.0+cu128 --index-url https://mirrors.aliyun.com/pytorch-wheels/cu128
+#   #    (if that mirror serves a dir listing instead of a PEP 503 index, download
+#   #     the .whl and:  pip install /path/to/torch-2.11.0+cu128-cp312-cp312-win_amd64.whl)
+#
+#   # 2) everything else
+#   pip install -r requirements.txt
+
+# --- PDF extraction (MinerU pipeline backend) ---
+# Use the [pipeline] extra: it pulls transformers, torchvision, onnxruntime,
+# shapely, pyclipper, ftfy, PyYAML — the runtime deps the bare `mineru` package
+# does NOT declare but the pipeline backend imports.
+mineru[pipeline]==3.2.3
+
+# mineru's OCR module imports `six` but does not declare it — pin it explicitly.
+six==1.17.0
+
+# --- Translation API (OpenAI-compatible) ---
+openai==2.41.0
+
+# --- PDF generation (reportlab) ---
+reportlab==4.5.1
+pillow==12.2.0
+
+# --- Utilities ---
+loguru==0.7.3
+python-dotenv==1.2.2
